@@ -1,29 +1,35 @@
 // Create a "close" button and append it to each list item
-const myNodelist = document.getElementsByTagName("LI");
-for (let i = 0; i < myNodelist.length; i++) {
-  const span = document.createElement("SPAN");
-  const txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  myNodelist[i].appendChild(span);
-}
+const createCloseButtons = () => {
+  const myNodelist = document.getElementsByTagName("LI");
+  for (let i = 0; i < myNodelist.length; i++) {
+    const span = document.createElement("SPAN");
+    const txt = document.createTextNode("\u00D7");
+    span.className = "close";
+    span.appendChild(txt);
+    myNodelist[i].appendChild(span);
+  }
+};
 
 // Click on a close button to hide the current list item
-const close = document.getElementsByClassName("close");
-for (let i = 0; i < close.length; i++) {
-  close[i].onclick = (e) => {
-    const div = e.currentTarget.parentElement;
-    div.style.display = "none";
-  };
-}
+const setupCloseButtonEvents = () => {
+  const close = document.getElementsByClassName("close");
+  for (let i = 0; i < close.length; i++) {
+    close[i].onclick = (e) => {
+      const div = e.currentTarget.parentElement;
+      div.style.display = "none";
+    };
+  }
+};
 
 // Add a "checked" symbol when clicking on a list item
-const list = document.querySelector('ul');
-list.addEventListener('click', (ev) => {
-  if (ev.target.tagName === 'LI') {
-    ev.target.classList.toggle('checked');
-  }
-}, false);
+const setupListCheckboxEvent = () => {
+  const list = document.querySelector('ul');
+  list.addEventListener('click', (ev) => {
+    if (ev.target.tagName === 'LI') {
+      ev.target.classList.toggle('checked');
+    }
+  }, false);
+};
 
 // Create a new list item when clicking on the "Add" button
 const newElement = () => {
@@ -45,6 +51,7 @@ const newElement = () => {
   span.appendChild(txt);
   li.appendChild(span);
 
+  const close = document.getElementsByClassName("close");
   for (let i = 0; i < close.length; i++) {
     close[i].onclick = (e) => {
       const div = e.currentTarget.parentElement;
@@ -52,3 +59,12 @@ const newElement = () => {
     };
   }
 };
+
+// Initialize functionalities
+const initTodoApp = () => {
+  createCloseButtons();
+  setupCloseButtonEvents();
+  setupListCheckboxEvent();
+};
+
+initTodoApp();
